@@ -4,13 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// Carregar Modelos e Bancos de Dados
-// Ao importar esses arquivos, a conexão é aberta e o .sync() do Sequelize é executado
-require('./model/modelosSql'); 
+// Carrega Modelos (Conecta e Sincroniza)
+require('./model/modelosSql');
 require('./model/Produto');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// --- IMPORTAR ROTAS ---
+var rotasIndex = require('./routes/rotasIndex');
+var rotasPovoamento = require('./routes/rotasPovoamento');
 
 var app = express();
 
@@ -24,8 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// --- USAR ROTAS ---
+app.use('/', rotasIndex);
+app.use('/', rotasPovoamento);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -34,11 +35,8 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

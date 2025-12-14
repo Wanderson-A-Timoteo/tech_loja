@@ -65,4 +65,4 @@ sequelize.sync({ alter: true })
         console.error('Erro ao sincronizar tabelas do MySQL:', error);
     });
 
-module.exports = { Usuario, Pedido, ItemPedido };
+module.exports = { Usuario, Pedido, ItemPedido, sequelize };
