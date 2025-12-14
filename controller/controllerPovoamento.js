@@ -3,22 +3,25 @@ const Produto = require('../model/Produto');
 
 exports.gerarDados = async (req, res) => {
     try {
-        // Ressincronizar SQL apaga tabelas e recria
-        await sequelize.sync({ force: true });
+        // 1. Limpeza do SQL
+        // Desativa verificação de chave estrangeira temporariamente para permitir TRUNCATE
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+        await sequelize.sync({ force: true }); // Recria as tabelas do zero
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
         
-        // Limpar MongoDB
+        // Limpeza do MongoDB
         await Produto.deleteMany({});
 
-        console.log("Iniciando povoamento...");
+        console.log("Bancos limpos. Iniciando inserção...");
 
-        // Criar 3 Usuários
+        // Criar Usuários
         await Usuario.bulkCreate([
             { nome: 'João Silva', email: 'joao@email.com', senha: '123' },
             { nome: 'Maria Figueira', email: 'maria@email.com', senha: '123' },
             { nome: 'Admin Tech', email: 'admin@techloja.com', senha: 'admin' }
         ]);
 
-        // Criar 10 Produtos
+        // Criar Produtos
         const produtos = [
             { nome: 'Smartphone Samsung A5', preco: 1999.99, estoque: 50, detalhes: { marca: 'Samsung', modelo: 'A5', cor: 'Preto' } },
             { nome: 'Tablet Xiaomi', preco: 1200.99, estoque: 30, detalhes: { marca: 'Xiaomi', armazenamento: '128GB' } },
@@ -31,15 +34,13 @@ exports.gerarDados = async (req, res) => {
             { nome: 'Teclado Mecânico', preco: 250.00, estoque: 10, detalhes: { switch: 'Blue', rgb: 'Sim' } },
             { nome: 'Mouse Gamer', preco: 120.50, estoque: 60, detalhes: { dpi: '12000' } }
         ];
-
         await Produto.insertMany(produtos);
-        console.log("Povoamento realizado!");
 
-        // Redirecionar para Home
+        console.log("Povoamento concluído!");
         res.redirect('/');
 
     } catch (erro) {
-        console.error("Erro:", erro);
+        console.error("Erro fatal ao povoar:", erro);
         res.status(500).send("Erro ao povoar: " + erro.message);
     }
 };
