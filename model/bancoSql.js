@@ -1,24 +1,23 @@
 const Sequelize = require('sequelize');
 
-// Eu uso Windows 11 Pro + WSL2 (Ubuntu): MySQL está rodando no Windows, e o Node.js no WSL2. Para conectar os dois, uso o IP do Windows. 
-// Substitua pelo seu IP do Windows (verifique no terminal: ip route show default | awk '{print $3}')
+// IP confirmado no seu terminal
 const ipWindows = '172.27.48.1'; 
 
 const sequelize = new Sequelize(
-    'tech_loja',       
-    'fullstack',       
-    '12345678', 
+    'ecommerce',       // Nome correto (PDF Pág 1) 
+    'fullstack',       // Usuário correto (PDF Pág 1) [cite: 501]
+    'senha_fullstack', // Senha correta (PDF Pág 1) 
     {
         host: ipWindows,
         dialect: 'mysql',
-        port: 3307,        
-        timezone: '-04:00' // Ajuste para o seu fuso horário, se necessário
+        port: 3307,        // Sua porta personalizada
+        timezone: '-03:00' // Fuso horário do Brasil
     }
 );
 
 sequelize.authenticate()
     .then(() => {
-        console.log('Conexão com o Banco de Dados MySQL estabelecida com sucesso.');
+        console.log('Conexão com MySQL (Sequelize) estabelecida com sucesso.');
     })
     .catch(err => {
         console.error('Erro ao conectar no MySQL:', err);

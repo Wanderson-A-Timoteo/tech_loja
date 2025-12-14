@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Carregar Modelos e Bancos de Dados
+// Ao importar esses arquivos, a conexão é aberta e o .sync() do Sequelize é executado
+require('./model/modelosSql'); 
+require('./model/Produto');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
