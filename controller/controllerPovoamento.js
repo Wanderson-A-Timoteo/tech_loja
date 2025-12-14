@@ -1,27 +1,41 @@
 const { Usuario, Pedido, ItemPedido, sequelize } = require('../model/modelosSql');
 const Produto = require('../model/Produto');
 
-exports.gerarDados = async (req, res) => {
+// Limpar tudo (Para deixar a tela vazia inicial)
+exports.limparBanco = async (req, res) => {
     try {
-        // 1. Limpeza do SQL
-        // Desativa verificação de chave estrangeira temporariamente para permitir TRUNCATE
+        // Desativa checagem de chave estrangeira para limpar sem erro
         await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-        await sequelize.sync({ force: true }); // Recria as tabelas do zero
+        await sequelize.sync({ force: true }); // Apaga e recria tabelas SQL
         await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
         
-        // Limpeza do MongoDB
+        await Produto.deleteMany({}); // Apaga tudo do MongoDB
+
+        console.log("BANCO LIMPO COM SUCESSO!");
+        res.redirect('/'); // Volta para a home
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro ao limpar: " + erro.message);
+    }
+};
+
+// Povoar
+exports.gerarDados = async (req, res) => {
+    try {
+        // Limpa antes de povoar para evitar duplicação
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
+        await sequelize.sync({ force: true });
+        await sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
         await Produto.deleteMany({});
 
-        console.log("Bancos limpos. Iniciando inserção...");
-
-        // Criar Usuários
+        // Cria Usuários
         await Usuario.bulkCreate([
             { nome: 'João Silva', email: 'joao@email.com', senha: '123' },
             { nome: 'Maria Figueira', email: 'maria@email.com', senha: '123' },
             { nome: 'Admin Tech', email: 'admin@techloja.com', senha: 'admin' }
         ]);
 
-        // Criar Produtos
+        // Cria Produtos
         const produtos = [
             { nome: 'Smartphone Samsung A5', preco: 1999.99, estoque: 50, detalhes: { marca: 'Samsung', modelo: 'A5', cor: 'Preto' } },
             { nome: 'Tablet Xiaomi', preco: 1200.99, estoque: 30, detalhes: { marca: 'Xiaomi', armazenamento: '128GB' } },
@@ -34,13 +48,13 @@ exports.gerarDados = async (req, res) => {
             { nome: 'Teclado Mecânico', preco: 250.00, estoque: 10, detalhes: { switch: 'Blue', rgb: 'Sim' } },
             { nome: 'Mouse Gamer', preco: 120.50, estoque: 60, detalhes: { dpi: '12000' } }
         ];
-        await Produto.insertMany(produtos);
 
-        console.log("Povoamento concluído!");
+        await Produto.insertMany(produtos);
+        console.log("Povoamento realizado!");
         res.redirect('/');
 
     } catch (erro) {
-        console.error("Erro fatal ao povoar:", erro);
+        console.error("Erro ao povoar:", erro);
         res.status(500).send("Erro ao povoar: " + erro.message);
     }
 };
