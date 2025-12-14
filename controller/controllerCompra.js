@@ -12,7 +12,10 @@ exports.exibirCheckout = async (req, res) => {
             produto: {
                 id: produto._id,
                 nome: produto.nome,
+                // Mantemos o formatado para exibir bonito
                 preco: produto.preco.toFixed(2).replace('.', ','),
+                // Campo numérico para o cálculo do JS
+                precoNumerico: produto.preco, 
                 estoque: produto.estoque
             }
         });

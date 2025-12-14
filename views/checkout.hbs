@@ -1,29 +1,40 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow">
+            <div class="card shadow border-0">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0"><i class="bi bi-cart-check"></i> Finalizar Compra</h4>
                 </div>
-                <div class="card-body">
-                    <h3 class="card-title">{{produto.nome}}</h3>
-                    <h4 class="text-success mb-4">R$ {{produto.preco}}</h4>
+                <div class="card-body p-4">
+                    <h3 class="card-title text-center mb-3">{{produto.nome}}</h3>
+                    
+                    <div class="text-center text-muted mb-4">
+                        Preço Unitário: R$ {{produto.preco}}
+                    </div>
                     
                     <form action="/finalizar-compra/{{produto.id}}" method="POST">
-                        <div class="mb-3">
-                            <label for="quantidade" class="form-label">Quantidade desejada:</label>
-                            <input type="number" class="form-control form-control-lg" 
-                                   id="quantidade" name="quantidade" 
-                                   value="1" min="1" max="{{produto.estoque}}" required>
-                            <div class="form-text">Temos {{produto.estoque}} unidades em estoque.</div>
-                        </div>
-
-                        <div class="alert alert-light border">
-                            <i class="bi bi-info-circle"></i> O valor total será calculado na próxima tela.
+                        <div class="row mb-4 align-items-center">
+                            <div class="col-md-6">
+                                <label for="quantidade" class="form-label fw-bold">Quantidade:</label>
+                                <input type="number" class="form-control form-control-lg text-center" 
+                                       id="quantidade" name="quantidade" 
+                                       value="1" min="1" max="{{produto.estoque}}" 
+                                       oninput="atualizarTotal()" required>
+                                <div class="form-text">Estoque disponível: {{produto.estoque}}</div>
+                            </div>
+                            
+                            <div class="col-md-6 text-end">
+                                <label class="form-label fw-bold d-block">Valor Total:</label>
+                                <h2 class="text-success fw-bold" id="valorTotalDisplay">
+                                    R$ {{produto.preco}}
+                                </h2>
+                            </div>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success btn-lg">Confirmar Pedido</button>
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-check-lg"></i> Confirmar Pedido
+                            </button>
                             <a href="/produto/{{produto.id}}" class="btn btn-outline-secondary">Cancelar</a>
                         </div>
                     </form>
@@ -32,3 +43,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Pega o preço numérico enviado pelo controller
+    const precoUnitario = {{produto.precoNumerico}};
+
+    function atualizarTotal() {
+        const inputQtd = document.getElementById('quantidade');
+        const displayTotal = document.getElementById('valorTotalDisplay');
+        
+        let qtd = parseInt(inputQtd.value);
+        
+        // Validação simples para não quebrar o cálculo
+        if (isNaN(qtd) || qtd < 1) {
+            qtd = 1;
+        }
+
+        // Calcula
+        const novoTotal = precoUnitario * qtd;
+
+        // Formata para Dinheiro Brasileiro (R$ X.XXX,XX)
+        const totalFormatado = novoTotal.toLocaleString('pt-BR', { 
+            style: 'currency', 
+            currency: 'BRL' 
+        });
+
+        // Atualiza na tela
+        displayTotal.innerText = totalFormatado;
+    }
+</script>
