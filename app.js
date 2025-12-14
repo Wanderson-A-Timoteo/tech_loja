@@ -11,6 +11,7 @@ require('./model/Produto');
 // --- IMPORTAR ROTAS ---
 var rotasIndex = require('./routes/rotasIndex');
 var rotasPovoamento = require('./routes/rotasPovoamento');
+var rotasProduto = require('./routes/rotasProduto');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // --- USAR ROTAS ---
 app.use('/', rotasIndex);
 app.use('/', rotasPovoamento);
+app.use('/', rotasProduto);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
