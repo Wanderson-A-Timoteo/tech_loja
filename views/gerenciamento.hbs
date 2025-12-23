@@ -1,0 +1,64 @@
+<div class="container mt-5">
+    <div class="mb-4">
+        <h2 class="mb-3">Gerenciamento de Pedidos</h2>
+    </div>
+
+    {{#if semPedidos}}
+        <div class="alert alert-info text-center">
+            Nenhum pedido registrado no sistema.
+        </div>
+    {{else}}
+        <div class="card shadow-sm border-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0 text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-start">Data do Pedido</th>
+                            <th class="text-start">Usuário</th>
+                            <th>Última Atualização</th>
+                            <th>Valor Total</th>
+                            <th>Produtos Distintos</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each pedidos}}
+                        <tr>
+                            <td class="text-start">{{this.data}}</td>
+                            <td class="text-start fw-bold">{{this.cliente}}</td>
+                            <td class="text-muted small">{{this.atualizacao}}</td>
+                            <td class="fw-bold text-success">R$ {{this.valor}}</td>
+                            <td>{{this.qtdItens}}</td>
+                            <td>
+                                <span class="badge bg-secondary">{{this.status}}</span>
+                            </td>
+                            <td>
+                                <form action="/gerenciamento/status/{{this.id}}" method="POST" class="d-flex justify-content-center gap-1">
+                                    
+                                    <button type="submit" name="novoStatus" value="CANCELADO" class="btn btn-danger btn-sm" title="Cancelar Pedido">
+                                        Cancelar
+                                    </button>
+
+                                    <button type="submit" name="novoStatus" value="SUSPENSO" class="btn btn-warning btn-sm text-white" title="Suspender Pedido">
+                                        Suspender
+                                    </button>
+
+                                    <button type="submit" name="novoStatus" value="CONCLUIDO" class="btn btn-success btn-sm" title="Concluir Pedido">
+                                        Concluir
+                                    </button>
+
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <a href="/dashboard" class="btn btn-secondary">Voltar</a>
+        </div>
+    {{/if}}
+</div>

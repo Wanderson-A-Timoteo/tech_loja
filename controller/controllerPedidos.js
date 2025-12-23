@@ -6,18 +6,16 @@ exports.listarPedidos = async (req, res) => {
         const pedidos = await Pedido.findAll({
             where: { usuario_id: 1 },
             include: [{ model: ItemPedido }], 
-            // Ordenar pela coluna 'data_pedido'
             order: [['data_pedido', 'DESC']] 
         });
 
         // Formata os dados para a View
         const pedidosFormatados = pedidos.map(p => ({
             id: p.id,
-            // Ler a data da coluna 'data_pedido'
             data: new Date(p.data_pedido).toLocaleString('pt-BR'), 
             valor: p.valor_total.toFixed(2).replace('.', ','),
             status: p.status,
-            qtdItens: p.itens_pedidos ? p.itens_pedidos.length : 0
+            qtdItens: p.ItemPedidos ? p.ItemPedidos.length : 0
         }));
 
         res.render('pedidos', { 

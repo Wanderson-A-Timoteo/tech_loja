@@ -15,6 +15,7 @@ var rotasProduto = require('./routes/rotasProduto');
 var rotasCompra = require('./routes/rotasCompra');
 var rotasPedidos = require('./routes/rotasPedidos');
 var rotasDashboard = require('./routes/rotasDashboard');
+var rotasGerenciamento = require('./routes/rotasGerenciamento');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/', rotasProduto);
 app.use('/', rotasCompra);
 app.use('/', rotasPedidos); 
 app.use('/', rotasDashboard);
+app.use('/', rotasGerenciamento);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
