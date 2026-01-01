@@ -75,7 +75,7 @@
    http://localhost:3000
    ```
 
-### 🧪 Como Testar o Fluxo (Demo)
+## 🧪 Como Testar o Fluxo (Demo)
 
 Como o sistema pode iniciar vazio, siga este roteiro:
 
@@ -87,7 +87,7 @@ Como o sistema pode iniciar vazio, siga este roteiro:
 
 ---
 
-### 👨‍💻 Desenvolvedor
+## 👨‍💻 Desenvolvedor
 
 <div align="center">
   <a href="https://github.com/Wanderson-A-Timoteo">
