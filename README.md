@@ -17,12 +17,34 @@
 
 ## 🚀 Tecnologias Utilizadas
 
+<div align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/Handlebars.js-f0772b?style=for-the-badge&logo=handlebars.js&logoColor=black" alt="Handlebars">
+  
+  <br>
+  
+  <img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="Express.js">
+  
+  <br>
+
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white" alt="Sequelize">
+  <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
+  <img src="https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white" alt="Mongoose">
+</div>
+
 - **Back-end:** Node.js, Express
 - **Bancos de Dados:**
   - MySQL (Sequelize ORM) - *Gestão de Usuários e Pedidos*
   - MongoDB (Mongoose ODM) - *Catálogo de Produtos e Estoque*
 - **Front-end:** Handlebars (HBS), Bootstrap 5, JavaScript Vanilla
 - **Arquitetura:** MVC (Model-View-Controller)
+
+
 
 ## ✨ Funcionalidades Principais
 
@@ -71,21 +93,20 @@
    ```
 
 5. **Acesse no navegador:**
-   ```bash
-   http://localhost:3000
-   ```
+    ```bash
+    http://localhost:3000
+    ```
 
 ## 🧪 Como Testar o Fluxo (Demo)
 
 Como o sistema pode iniciar vazio, siga este roteiro:
 
-- 1. Acesse `http://localhost:3000/reset` para limpar completamente os bancos.
-- 2. Na Home, clique em "Realizar Povoamento" para gerar produtos e usuários de teste.
-- 3. Navegue, escolha um produto e finalize uma compra.
-- 4. Acesse o menu "Minhas Compras" para ver o histórico.
-- 5. Acesse o menu "Dashboard" ou "Gerenciamento" para ver a visão do admin.
+  1. Acesse `http://localhost:3000/reset` para limpar completamente os bancos.
+  2. Na Home, clique em "Realizar Povoamento" para gerar produtos e usuários de teste.
+  3. Navegue, escolha um produto e finalize uma compra.
+  4. Acesse o menu "Minhas Compras" para ver o histórico.
+  5. Acesse o menu "Dashboard" ou "Gerenciamento" para ver a visão do admin.
 
----
 
 ## 👨‍💻 Desenvolvedor
 
@@ -96,7 +117,18 @@ Como o sistema pode iniciar vazio, siga este roteiro:
   <br />
   <br />
   <h4>Wanderson Timóteo</h4>
-  <a href="https://github.com/Wanderson-A-Timoteo" target="_blank">
+  
+  <!-- <a href="https://github.com/Wanderson-A-Timoteo" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Badge GitHub">
+  </a>
+  <br />
+  <br /> -->
+  
+  <a href="https://www.wandersontimoteo.com.br/" target="_blank">
+    <b>🌐 Visite meu Portfólio</b>
+  </a>
+  &nbsp;|&nbsp;
+  <a href="https://wanderson-a-timoteo.github.io/perfil-de-contato/" target="_blank">
+    <b>🔗 Entre em Contato</b>
   </a>
 </div>
